@@ -1,7 +1,7 @@
 <?php
 $current_page = "About";
-include("header.inc");
-include("menu.inc");
+include("includes/header.inc");
+include("includes/menu.inc");
 ?>
 
 <div class="page-with-sidebar">
@@ -135,4 +135,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<?php include("footer.inc"); ?>
+<?php include("includes/footer.inc"); ?>

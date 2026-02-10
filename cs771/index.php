@@ -1,8 +1,8 @@
 <?php
 $current_page = "CS771";
 $base_url = "../";
-include("../header.inc");
-include("../menu.inc");
+include("../includes/header.inc");
+include("../includes/menu.inc");
 ?>
 
 <h1>CS771 Assignment Submissions</h1>
@@ -10,4 +10,4 @@ include("../menu.inc");
     <a href="test.txt">test.txt</a>
 </p>
 
-<?php include("../footer.inc"); ?>
+<?php include("../includes/footer.inc"); ?>

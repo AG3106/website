@@ -1,7 +1,7 @@
 <?php
 $current_page = "Research";
-include("header.inc");
-include("menu.inc");
+include("includes/header.inc");
+include("includes/menu.inc");
 ?>
 
 <h1>Research</h1>
@@ -26,4 +26,4 @@ include("menu.inc");
     </div>
 </div>
 
-<?php include("footer.inc"); ?>
+<?php include("includes/footer.inc"); ?>

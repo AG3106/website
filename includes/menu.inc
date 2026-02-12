@@ -10,7 +10,7 @@
                             <a href="<?php echo $base_url; ?>research.php" class="nav-item <?php if($current_page == 'Research') echo 'active'; ?>">Research</a>
                         </li>
                         <li>
-                            <a href="<?php echo $base_url; ?>about2.php" class="nav-item <?php if($current_page == 'Contact') echo 'active'; ?>">Contact</a>
+                            <a href="<?php echo $base_url; ?>contact.php" class="nav-item <?php if($current_page == 'Contact') echo 'active'; ?>">Contact</a>
                         </li>
                     </ul>
                 </nav>

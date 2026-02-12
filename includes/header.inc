@@ -9,8 +9,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $current_page; ?> | <?php echo $site_name; ?></title>
-    <link rel="stylesheet" href="<?php echo $base_url; ?>css/style.css">
+    <title><?php echo $site_name; ?></title>
+    <link rel="stylesheet" href="<?php echo $base_url; ?>css/style.css?v=<?php echo time(); ?>.7">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script>
         (function() {

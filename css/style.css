@@ -737,10 +737,52 @@ footer p {
     font-size: 1.3rem;
   }
 
+  h1[id],
+  h2[id],
+  h3[id] {
+    scroll-margin-top: 180px;
+    /* Fallback: padding/margin hack if scroll-margin fails in some contexts */
+    padding-top: 180px;
+    margin-top: -180px;
+    pointer-events: none;
+    /* Prevent clicking on the invisible padding area */
+    border-bottom: none;
+    /* Move border to a pseudo-element if needed, or accept it might be offset */
+  }
+
+  /* Restore pointer events for content following headers */
+  h1[id]+*,
+  h2[id]+*,
+  h3[id]+* {
+    pointer-events: auto;
+  }
+
   .wrapper {
     padding: 0 16px;
     max-width: 100vw;
-    overflow-x: hidden;
+    /* overflow-x: hidden;  <-- REMOVED: Breaks sticky positioning */
+  }
+
+  /* Fix main nav wrapping */
+  nav ul {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 5px;
+    /* Space for scrollbar if visible */
+    scrollbar-width: none;
+    /* Hide scrollbar Firefox */
+  }
+
+  nav ul::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar Chrome/Safari */
+  }
+
+  nav .nav-item {
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   /* Sticky sidebar converts to horizontal scroll menu */
@@ -753,29 +795,44 @@ footer p {
     position: sticky;
     top: 0;
     min-width: unset;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 10px 0;
+
+    /* Full width end-to-end */
+    width: 100vw;
+    margin-left: -16px;
+    /* Neutralize wrapper padding */
+    margin-right: -16px;
+    padding: 0;
+    /* Remove vertical padding for tighter look */
+
     background: var(--bg-primary);
-    z-index: 100;
+    z-index: 1000;
     border-bottom: 1px solid var(--border);
     margin-bottom: 20px;
+    box-shadow: none;
+    /* Remove floating shadow - make it 2D */
   }
 
   .sidebar-nav {
     display: flex;
     border-left: none;
     border-bottom: none;
-    gap: 16px;
+    gap: 0;
+    /* Removing gap, control via padding */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 0;
+    padding: 0;
     margin: 0;
     width: 100%;
     /* Hide scrollbar */
     -ms-overflow-style: none;
     scrollbar-width: none;
+
+    justify-content: flex-start;
+  }
+
+  .sidebar-nav li {
+    flex: 0 0 auto;
+    /* Prevent shrinking */
   }
 
   /* Constrain text content on mobile */
@@ -806,9 +863,11 @@ footer p {
     border-left: none;
     border-bottom: 2px solid transparent;
     margin: 0;
-    padding: 6px 0;
+    padding: 12px 16px;
+    /* Larger hit area */
     white-space: nowrap;
     font-size: 0.95rem;
+    text-align: center;
   }
 
   .sidebar-link.active {
@@ -827,8 +886,10 @@ footer p {
 
   .sidebar-subnav .sidebar-link {
     padding-left: 0;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
+    /* Smaller font for sub-items */
     color: var(--text-muted);
+    font-weight: 400;
   }
 
   .sidebar-subnav .sidebar-link.active {
@@ -866,4 +927,36 @@ footer p {
     width: 100%;
     justify-content: center;
   }
+}
+
+
+
+/* Sliding Sidebar Marker */
+.sidebar-nav {
+  position: relative;
+}
+
+.sidebar-marker {
+  position: absolute;
+  left: -2px;
+  /* Overlap border */
+  width: 2px;
+  background-color: var(--accent);
+  transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.sidebar-link.active {
+  /* Remove old active style */
+  color: var(--accent);
+  border-left-color: transparent;
+  font-weight: 600;
+}
+
+/* Intermediate highlight for sidebar links */
+.sidebar-link.intermediate-active {
+  color: var(--accent);
+  transition: all 0.2s ease;
+  font-weight: 500;
 }

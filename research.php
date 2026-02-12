@@ -4,11 +4,11 @@ include("includes/header.inc");
 include("includes/menu.inc");
 ?>
 
-<h1>Research</h1>
+<h1>Conferences</h1>
 
     <div class="project-header">
         <div class="project-title-row">
-            <h2>TRINETRA: Text-guided Remote-sensing Interpretation via Ensemble-based TRansformers</h2>
+            <h3>TRINETRA: Text-guided Remote-sensing Interpretation via Ensemble-based TRansformers</h2>
         </div>
         <div class="project-meta">
             <span class="project-org">IIT Kanpur • SAC, ISRO</span>

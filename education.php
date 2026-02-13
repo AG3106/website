@@ -1,5 +1,5 @@
 <?php
-$current_page = "About";
+$current_page = "Education";
 include("includes/header.inc");
 include("includes/menu.inc");
 ?>
@@ -8,10 +8,11 @@ include("includes/menu.inc");
     <aside class="page-sidebar">
         <ul class="sidebar-nav">
             <li>
-                <a href="#about" class="sidebar-link active">About Me</a>
+                <a href="#education" class="sidebar-link active">Academic Qualifications</a>
                 <ul class="sidebar-subnav">
-                    <li><a href="#achievements" class="sidebar-link">Key Achievements</a></li>
-                    <li><a href="#skills" class="sidebar-link">Technical Skills</a></li>
+                    <li><a href="#btech" class="sidebar-link">B.Tech — IIT Kanpur</a></li>
+                    <li><a href="#hsc" class="sidebar-link">Higher Secondary (XII)</a></li>
+                    <li><a href="#icse" class="sidebar-link">Secondary (X)</a></li>
                 </ul>
             </li>
         </ul>
@@ -19,26 +20,79 @@ include("includes/menu.inc");
 
     <div class="page-content">
 
-        <h1 id="about">About Me</h1>
+        <h1 id="education">Academic Qualifications</h1>
 
-        <p>I am a second-year undergraduate at IIT Kanpur, pursuing a B.Tech in Computer Science and Engineering. My interests include <strong>Machine Learning</strong>, <strong>Computer Vision</strong>, <strong>Robotics</strong>, and <strong>Reinforcement Learning</strong>.</p>
+        <div class="education-timeline">
 
-        <h2 id="achievements">Key Achievements</h2>
+            <!-- B.Tech -->
+            <div class="timeline-item" id="btech">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3 class="degree">B.Tech, Computer Science and Engineering</h3>
+                        <span class="timeline-year">2024–Present</span>
+                    </div>
+                    <div class="institution">Indian Institute of Technology Kanpur</div>
+                    <div class="score">CPI: 9.22/10</div>
 
-        <ul>
-            <li><strong>Academic Excellence Award 2024</strong> — top 10% of 1,200+ student cohort</li>
-            <li><strong>Reliance Foundation UG Scholar</strong> — awarded to top 5,000 students across India</li>
-            <li><strong>JEE Advanced 2024</strong> — AIR 719 among 250,000 candidates</li>
-            <li><strong>JEE Main 2024</strong> — AIR 164 (99.99th percentile), city topper</li>
-        </ul>
+                    <div class="por-section">
+                        <h4 class="por-heading">Positions of Responsibility</h4>
 
-        <h2 id="skills">Technical Skills</h2>
+                        <div class="por-card">
+                            <div class="por-card-header">
+                                <h5 class="por-role">Secretary — Brain and Cognitive Sciences Club, IITK</h5>
+                                <span class="por-date">June 2025 - Present</span>
+                            </div>
+                            <p class="por-label">Initiatives:</p>
+                            <ul>
+                                <li>Conducted sessions on Introduction to ML and a workshop on Reinforcement Learning</li>
+                                <li>Mentored 20+ students in a winter project on Competitive Reinforcement Learning</li>
+                                <li>Participated in the NeurIPS Open Polymer Prediction 2025 hackathon (weighted MAE: 0.1)</li>
+                            </ul>
+                        </div>
 
-        <ul>
-            <li><strong>Programming Languages & Utilities:</strong> Python, C, C++, Bash, Git, LaTeX</li>
-            <li><strong>Libraries & Frameworks:</strong> PyTorch, Unsloth, NumPy, Pandas, Matplotlib, TensorFlow, OpenCV, ROS2 Humble</li>
-            <li><strong>Tools & Platforms:</strong> Google Colab, VS Code, Hugging Face, NVIDIA Jetson, GitHub, Gazebo, IsaacSim</li>
-        </ul>
+                        <div class="por-card">
+                            <div class="por-card-header">
+                                <h5 class="por-role">Team Member — Team ERA, IITK</h5>
+                                <span class="por-date">April 2025 - Present</span>
+                            </div>
+                            <p class="por-label">Contributions:</p>
+                            <ul>
+                                <li>Improving decision-making algorithms for robots competing in the <strong>RoboCup MSL</strong></li>
+                                <li>Designing real-time perception and control algorithms</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- XII -->
+            <div class="timeline-item" id="hsc">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3 class="degree">Higher Secondary Certificate (XII)</h3>
+                        <span class="timeline-year">2024</span>
+                    </div>
+                    <div class="institution">Matoshri, Eklahare</div>
+                    <div class="score">Score: 88.67%</div>
+                </div>
+            </div>
+
+            <!-- X -->
+            <div class="timeline-item" id="icse">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3 class="degree">Indian Certificate of Secondary Education (X)</h3>
+                        <span class="timeline-year">2022</span>
+                    </div>
+                    <div class="institution">Ryan International, Nashik</div>
+                    <div class="score">Score: 92.17%</div>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 </div>
@@ -50,14 +104,12 @@ document.addEventListener('DOMContentLoaded', function() {
     let isManualScroll = false;
     let manualScrollTimer = null;
     
-    // Populate sections
     links.forEach(link => {
         const id = link.getAttribute('href').substring(1);
         const el = document.getElementById(id);
         if (el) sections.push({ id, el, link });
     });
 
-    // Create marker element
     const nav = document.querySelector('.sidebar-nav');
     if (nav) {
         const marker = document.createElement('div');
@@ -66,11 +118,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateActive() {
-        if (isManualScroll) return; // Skip update if scrolling manually
-
+        if (isManualScroll) return;
         if (sections.length === 0) return;
         
-        // Default to the first section if none match yet (top of page)
         let current = sections[0];
         const offset = 200; 
 
@@ -81,7 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Special check for bottom of page to ensure last item is selected
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
              current = sections[sections.length - 1];
         }
@@ -98,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const marker = document.querySelector('.sidebar-marker');
         const nav = document.querySelector('.sidebar-nav');
         if (marker && nav && link) {
-            // Need relative position to nav
             const navRect = nav.getBoundingClientRect();
             const linkRect = link.getBoundingClientRect();
             
@@ -110,10 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Update on scroll
     window.addEventListener('scroll', updateActive);
-    
-    // Initial call
     updateActive();
 
     function highlightIntermediates(fromLink, toLink) {
@@ -122,8 +167,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const allLinks = sections.map(s => s.link);
         const startIdx = allLinks.indexOf(fromLink);
         const endIdx = allLinks.indexOf(toLink);
-        
-
 
         if (startIdx === -1 || endIdx === -1 || startIdx === endIdx) return;
         
@@ -138,7 +181,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (indices.length === 0) return;
         
-        // Match CSS transition duration (300ms)
         const totalDuration = 300; 
         const stepDuration = totalDuration / (indices.length + 1);
         
@@ -148,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const link = allLinks[idx];
             setTimeout(() => {
                 link.classList.add('intermediate-active');
-                setTimeout(() => link.classList.remove('intermediate-active'), 250); // Longer active time
+                setTimeout(() => link.classList.remove('intermediate-active'), 250);
             }, (i + 1) * stepDuration);
         });
     }
@@ -156,7 +198,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function scrollToActive(link) {
         const nav = document.querySelector('.sidebar-nav');
         if (nav && link) {
-            // Center the active link in the scroll view
             const scrollLeft = link.offsetLeft - (nav.offsetWidth / 2) + (link.offsetWidth / 2);
             nav.scrollTo({
                 left: scrollLeft,
@@ -171,10 +212,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const currentActive = document.querySelector('.sidebar-link.active');
             
-            // Move marker immediately (starts 300ms transition)
             moveMarker(this);
 
-            // Highlight intermediates based on 300ms duration
             if (currentActive && currentActive !== this) {
                  highlightIntermediates(currentActive, this);
             }
@@ -182,36 +221,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = this.getAttribute('href').substring(1);
             const targetEl = document.getElementById(id);
             
-            // Set flag to prevent scroll spy from interfering
             isManualScroll = true;
             if (manualScrollTimer) clearTimeout(manualScrollTimer);
             manualScrollTimer = setTimeout(() => {
                 isManualScroll = false;
             }, 1000); 
 
-            // Scroll to target
             if (targetEl) {
                 targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
             
-            // Auto-scroll the nav bar to keep this item visible
             scrollToActive(this);
 
-            // Delay updating active state until slide finishes (300ms)
             setTimeout(() => {
                 links.forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
             }, 300);
         });
     });
-    
-    // Also scroll on initial load and during scroll spy interaction
-    const oldUpdateActive = updateActive; // preserve ref if needed, but we modify updateActive directly
-    
-    // We need to inject scrollToActive into updateActive. 
-    // Since I can't easily hook into the middle of the existing function with replace_file_content without replacing the whole thing, 
-    // I will replace updateActive above. Wait, I am editing the click handler here.
-    // I should probably edit updateActive separately to include scrollToActive(current.link).
 });
 </script>
 

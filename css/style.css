@@ -186,6 +186,10 @@ nav {
   margin-bottom: 30px;
 }
 
+.nav-arrow {
+  display: none;
+}
+
 nav ul {
   list-style: none;
   display: flex;
@@ -763,26 +767,87 @@ footer p {
     /* overflow-x: hidden;  <-- REMOVED: Breaks sticky positioning */
   }
 
-  /* Fix main nav wrapping */
-  nav ul {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    justify-content: flex-start;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 5px;
-    /* Space for scrollbar if visible */
-    scrollbar-width: none;
-    /* Hide scrollbar Firefox */
+  /* Prevent horizontal overflow from breaking sticky */
+  html {
+    overflow-x: hidden;
   }
 
-  nav ul::-webkit-scrollbar {
+  /* Fix main nav — full width edge-to-edge with horizontal scroll */
+  .nav-wrapper {
+    position: relative;
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    margin-right: -16px;
+    background: var(--bg-primary);
+    display: flex;
+    align-items: center;
+  }
+
+  nav {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    background: transparent;
+  }
+
+  /* Arrows for scrolling */
+  .nav-arrow {
     display: none;
-    /* Hide scrollbar Chrome/Safari */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    border: none;
+    color: var(--text-primary);
+    z-index: 10;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    padding: 0;
+    transition: opacity 0.2s;
+  }
+
+  .nav-arrow.visible {
+    display: flex;
+  }
+
+  .left-arrow {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-primary) 60%, transparent);
+  }
+
+  .right-arrow {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-primary) 60%, transparent);
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  nav ul {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 0;
+    padding: 0 12px;
+    margin: 0;
+    /* Fix alignment */
+    width: max-content;
+    min-width: 100%;
   }
 
   nav .nav-item {
     white-space: nowrap;
     flex-shrink: 0;
+    padding: 10px 14px;
+    font-size: 0.9rem;
   }
 
   /* Sticky sidebar converts to horizontal scroll menu */
@@ -792,24 +857,27 @@ footer p {
   }
 
   .page-sidebar {
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     min-width: unset;
 
-    /* Full width end-to-end */
-    width: 100vw;
+    /* Full width end-to-end — avoid 100vw which includes scrollbar */
+    width: calc(100% + 32px);
     margin-left: -16px;
-    /* Neutralize wrapper padding */
     margin-right: -16px;
     padding: 0;
-    /* Remove vertical padding for tighter look */
+
+    /* Override desktop properties that break sticky */
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
 
     background: var(--bg-primary);
     z-index: 1000;
     border-bottom: 1px solid var(--border);
     margin-bottom: 20px;
     box-shadow: none;
-    /* Remove floating shadow - make it 2D */
   }
 
   .sidebar-nav {
@@ -817,22 +885,18 @@ footer p {
     border-left: none;
     border-bottom: none;
     gap: 0;
-    /* Removing gap, control via padding */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 0;
+    padding: 0 12px;
     margin: 0;
     width: 100%;
-    /* Hide scrollbar */
     -ms-overflow-style: none;
     scrollbar-width: none;
-
     justify-content: flex-start;
   }
 
   .sidebar-nav li {
     flex: 0 0 auto;
-    /* Prevent shrinking */
   }
 
   /* Constrain text content on mobile */
@@ -856,17 +920,16 @@ footer p {
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
   }
 
   .sidebar-link {
     border-left: none;
     border-bottom: 2px solid transparent;
     margin: 0;
-    padding: 12px 16px;
-    /* Larger hit area */
+    padding: 10px 12px;
     white-space: nowrap;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     text-align: center;
   }
 
@@ -879,15 +942,14 @@ footer p {
   /* Show nested subnavs inline on mobile */
   .sidebar-subnav {
     display: flex;
-    gap: 16px;
+    gap: 8px;
     padding-left: 0;
     margin: 0;
   }
 
   .sidebar-subnav .sidebar-link {
-    padding-left: 0;
-    font-size: 0.8rem;
-    /* Smaller font for sub-items */
+    padding: 10px 8px;
+    font-size: 0.78rem;
     color: var(--text-muted);
     font-weight: 400;
   }
@@ -930,6 +992,184 @@ footer p {
 }
 
 
+/* ===== Education Timeline ===== */
+.education-timeline {
+  position: relative;
+  padding-left: 28px;
+  margin-top: 20px;
+}
+
+.education-timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 32px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 0 2px var(--accent);
+  z-index: 1;
+}
+
+.timeline-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.timeline-content:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.degree {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.timeline-year {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--accent);
+  white-space: nowrap;
+  background: rgba(13, 148, 136, 0.08);
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+[data-theme="dark"] .timeline-year {
+  background: rgba(45, 212, 191, 0.12);
+}
+
+.institution {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.score {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ===== POR Cards (nested inside B.Tech) ===== */
+.por-section {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.por-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.por-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  transition: box-shadow 0.2s ease;
+}
+
+.por-card:last-child {
+  margin-bottom: 0;
+}
+
+.por-card:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.por-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.por-role {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.por-date {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.por-label {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px !important;
+}
+
+.por-card ul {
+  margin: 0 0 0 20px;
+}
+
+.por-card li {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .por-card {
+  background: var(--bg-card);
+  border-color: var(--border);
+  border-left-color: var(--accent);
+}
+
+[data-theme="dark"] .timeline-content {
+  box-shadow: none;
+}
+
+[data-theme="dark"] .timeline-content:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
 
 /* Sliding Sidebar Marker */
 .sidebar-nav {

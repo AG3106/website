@@ -37,7 +37,17 @@ include("includes/menu.inc");
 
                     <div class="por-section">
                         <h4 class="por-heading">Positions of Responsibility</h4>
-
+                        <div class="por-card">
+                            <div class="por-card-header">
+                                <h5 class="por-role">Team Member — Team ERA, IITK</h5>
+                                <span class="por-date">April 2025 - Present</span>
+                            </div>
+                            <p class="por-label">Contributions:</p>
+                            <ul>
+                                <li>Improving decision-making algorithms for robots competing in the <strong>RoboCup MSL</strong></li>
+                                <li>Designing real-time perception and control algorithms</li>
+                            </ul>
+                        </div>
                         <div class="por-card">
                             <div class="por-card-header">
                                 <h5 class="por-role">Secretary — Brain and Cognitive Sciences Club, IITK</h5>
@@ -48,18 +58,6 @@ include("includes/menu.inc");
                                 <li>Conducted sessions on Introduction to ML and a workshop on Reinforcement Learning</li>
                                 <li>Mentored 20+ students in a winter project on Competitive Reinforcement Learning</li>
                                 <li>Participated in the NeurIPS Open Polymer Prediction 2025 hackathon (weighted MAE: 0.1)</li>
-                            </ul>
-                        </div>
-
-                        <div class="por-card">
-                            <div class="por-card-header">
-                                <h5 class="por-role">Team Member — Team ERA, IITK</h5>
-                                <span class="por-date">April 2025 - Present</span>
-                            </div>
-                            <p class="por-label">Contributions:</p>
-                            <ul>
-                                <li>Improving decision-making algorithms for robots competing in the <strong>RoboCup MSL</strong></li>
-                                <li>Designing real-time perception and control algorithms</li>
                             </ul>
                         </div>
                     </div>

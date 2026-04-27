@@ -26,7 +26,7 @@ include("includes/menu.inc");
         <h2 id="achievements">Key Achievements</h2>
 
         <ul>
-            <li><strong>Academic Excellence Award 2024</strong> — top 10% of 1,200+ student cohort</li>
+            <li><strong>Academic Excellence Award 2024 & 2025</strong> — top 10% of 1,200+ student cohort</li>
             <li><strong>Reliance Foundation UG Scholar</strong> — awarded to top 5,000 students across India</li>
             <li><strong>JEE Advanced 2024</strong> — AIR 719 among 250,000 candidates</li>
             <li><strong>JEE Main 2024</strong> — AIR 164 (99.99th percentile), city topper</li>
